@@ -21,16 +21,23 @@ var specialChar=["!", "@", "#","$", "%", "^", "&", "*"]
 
 //this variable is used to pick the case, number, or char
 var pick;
+//these variable is used to make sure every option is used
+var checkerUpper = false;
+var checkerLower = false;
+var checkerNumber = false;
+var checckerSpecial = false;
 
 
 
 function generatePassword(){
+
   var passLength = prompt("how long do you want the password to be?");
 
-  passOption.upper = window.confirm("Do you want upper case?");
-  passOption.lower = window.confirm("Do you want lower case?");
-  passOption.special = window.confirm("Do you want special characters?");
-  passOption.number = window.confirm("Do you want numbers?");
+    passOption.upper = window.confirm("Do you want upper case?");
+    passOption.lower = window.confirm("Do you want lower case?");
+    passOption.number = window.confirm("Do you want numbers?");
+    passOption.special = window.confirm("Do you want special characters?");
+    
   
 
       //this fill the array with random Upper Case
@@ -114,40 +121,63 @@ function generatePassword(){
       && passOption.number == false
       && passOption.special == false
       ){
+        do{
 
-      for(var i=0; i<passLength; i++){
-          pick = Math.floor(Math.random() * 2);
-          console.log(pick);
-            if(pick == 0 ){
-              randomUpper();
-            }
-            else if(pick == 1){
-              randomLower();
-            }
-      }
-
+          passOption.password = [];
+          for(var i=0; i<passLength; i++){
+              pick = Math.floor(Math.random() * 2);
+              console.log(pick);
+                if(pick == 0 ){
+                  randomUpper();
+                  checkerUpper = true;
+                }
+                else if(pick == 1){
+                  randomLower();
+                  checkerLower = true;
+                }
+          }
+        }while(checkerUpper == false || checkerLower == false);
   }
 
   else if(passOption.upper 
       && passOption.lower 
       && passOption.number
       && passOption.special == false){
-    for(var i=0; i<passLength; i++){
-      pick = Math.floor(Math.random() *3);
-      console.log(pick);
-        if(pick == 0 ){
-          randomUpper();
-        }
-        else if(pick == 1){
-          randomLower();
-        }
-        else if(pick == 2){
-          randomNumber();
-        }
-    }
-  }
 
-  else if(passOption.upper 
+        do{
+            passOption.password = [];
+            
+            checkerUpper = false;
+            checkerLower = false;
+            checkerNumber = false;
+
+            for(var i=0; i<passLength; i++){
+              pick = Math.floor(Math.random() *3);
+              
+                if(pick == 0 ){
+                  randomUpper();
+                  checkerUpper = true;
+                }
+                else if(pick == 1){
+                  randomLower();
+                  checkerLower = true;
+                }
+                else if(pick == 2){
+                  randomNumber();
+                  checkerNumber = true;
+                }
+              }            
+              
+           }while(checkerUpper == false || checkerLower == false || checkerNumber == false ) ;
+           
+           console.log(passOption.password);
+          //  return(passOption.password);
+     }
+
+     console.log(passOption.password);
+
+
+  if(passOption.upper 
       && passOption.lower 
       && passOption.number
       && passOption.special){
@@ -167,9 +197,9 @@ function generatePassword(){
           else if(pick == 3){
             randomSpecial();
           }
+          
     }
   }
-
 
 
   console.log(passOption.password);
@@ -189,16 +219,12 @@ function generatePassword(){
       randomSpecialLoop();
     }
 
+
+    // return passOption.password;
+
 }
-  //
-
-
-
-
 
   // console.log(passOption.password);
-
-
 
 generatePassword();
 // console.log(passOption);
@@ -207,40 +233,26 @@ generatePassword();
 // console.log(numbers);
 // console.log(specialChar);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //     testing things out before making it work with the stuff below 
 
 
 
-// // Write password to the #password input
-// function writePassword() {
+// Write password to the #password input
+function writePassword() {
 
 
-//   var password = generatePassword();
+  var password = generatePassword();
   
 
-//   var passwordText = document.querySelector("#password");
+  var passwordText = document.querySelector("#password");
 
 
-//   passwordText.value = "password";
+  passwordText.value = "password";
 
 
 
-// }
+}
 
-// // Add event listener to generate button
-// generateBtn.addEventListener("click", writePassword);
+// Add event listener to generate button
+generateBtn.addEventListener("click", writePassword);
 
