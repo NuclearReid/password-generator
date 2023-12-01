@@ -128,42 +128,68 @@ function generatePassword(){
 
   }
 
-if(passOption.upper && passOption.lower && passOption.number){
-  for(var i=0; i<passLength; i++){
-    pick = Math.floor(Math.random() *3);
-    console.log(pick);
-      if(pick == 0 ){
-        randomUpper();
-      }
-      else if(pick == 1){
-        randomLower();
-      }
-      else if(pick == 2){
-        randomNumber();
-      }
-}
+  else if(passOption.upper 
+      && passOption.lower 
+      && passOption.number
+      && passOption.special == false){
+    for(var i=0; i<passLength; i++){
+      pick = Math.floor(Math.random() *3);
+      console.log(pick);
+        if(pick == 0 ){
+          randomUpper();
+        }
+        else if(pick == 1){
+          randomLower();
+        }
+        else if(pick == 2){
+          randomNumber();
+        }
+    }
+  }
 
+  else if(passOption.upper 
+      && passOption.lower 
+      && passOption.number
+      && passOption.special){
 
+      for(var i=0; i<passLength; i++){
+        pick = Math.floor(Math.random() *4);
+        console.log(pick);
+          if(pick == 0 ){
+            randomUpper();
+          }
+          else if(pick == 1){
+            randomLower();
+          }
+          else if(pick == 2){
+            randomNumber();
+          }
+          else if(pick == 3){
+            randomSpecial();
+          }
+    }
+  }
 
-}
 
 
   console.log(passOption.password);
 
 
   //only if one option is selected
-  if(passOption.upper){
-    randomUpperLoop();
-  }
-  else if(passOption.lower){
-    randomLowerLoop();
-  }
-  else if(passOption.number){
-    randomNumberLoop();
-  }
-  else if(passOption.special){
-    randomSpecialLoop();
-  }
+    if(passOption.upper){
+      randomUpperLoop();
+    }
+    else if(passOption.lower){
+      randomLowerLoop();
+    }
+    else if(passOption.number){
+      randomNumberLoop();
+    }
+    else if(passOption.special){
+      randomSpecialLoop();
+    }
+
+}
   //
 
 
@@ -173,13 +199,13 @@ if(passOption.upper && passOption.lower && passOption.number){
   // console.log(passOption.password);
 
 
-}
+
 generatePassword();
-console.log(passOption);
-console.log(upperCase);
-console.log(lowerCase);
-console.log(numbers);
-console.log(specialChar);
+// console.log(passOption);
+// console.log(upperCase);
+// console.log(lowerCase);
+// console.log(numbers);
+// console.log(specialChar);
 
 
 
