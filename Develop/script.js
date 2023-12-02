@@ -28,18 +28,26 @@ var checkerNumber = false;
 var checkerSpecial = false;
 
 
+//What the password will be turned into at the end.
+var passwordString;
+
 
 function generatePassword(){
 
 
     var passLength = prompt("how long do you want the password to be? (for security, must be more than 4 characters)");
 
+
+    if(passLength <= 3){
+      return "You need to use at least 4 characters";
+    }
+    
       passOption.upper = window.confirm("Do you want upper case?");
       passOption.lower = window.confirm("Do you want lower case?");
       passOption.number = window.confirm("Do you want numbers?");
       passOption.special = window.confirm("Do you want special characters?");
       
-    
+     
 
         //this fill the array with random Upper Case
     var randomUpperLoop = function(){
@@ -421,13 +429,15 @@ function generatePassword(){
         }
 
       console.log(passOption.password);
-  
+
+      passwordString = passOption.password.join("");
+      console.log(passwordString);
+      return passwordString;
 
 }
 
-  
 
-generatePassword();
+// generatePassword();
 
 
 
@@ -438,11 +448,12 @@ function writePassword() {
 
   var password = generatePassword();
   
+    
 
   var passwordText = document.querySelector("#password");
 
 
-  passwordText.value = "password";
+  passwordText.value = password;
 
 
 
