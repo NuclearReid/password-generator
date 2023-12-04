@@ -5,6 +5,50 @@
 
 var generateBtn = document.querySelector("#generate");
 
+
+//this was not originally fully my idea. 
+//I got to the idea for this solution with the help of Microsoft Copilot. 
+//I'm including it in my file because it's a better option but it's not fully mine
+
+
+var upperCase = [A B C D....];
+var lowerCase = [a b c d...];
+var numbers = [1 2 3 4..];
+var special = [! @ # $...];
+
+var passToFill = [];
+
+var length = prompt("how long")?
+var upper = confirm("want uppercase?");
+if(upper){
+  passToFill = passToFill.join(upperCase);
+}
+var upper = confirm("want lower case?");
+if(lower){
+  passToFill = passToFill.join(upperlower);
+}
+var upper = confirm("want numbers?");
+if(number){
+  passToFill = passToFill.join(uppernumbers);
+}
+var upper = confirm("want special?");
+if(special){
+  passToFill = passToFill.join(upperspecial);
+}
+
+return passToFill
+
+
+
+
+
+
+
+
+
+// this is absudrly ineffeicient, going to rewrite it
+
+
 //The variable containing the password and options chosen
 var passOption = {
   upper: false,
@@ -18,8 +62,8 @@ var upperCase=["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", 
 var lowerCase=["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var numbers=[0,1,2,3,4,5,6,7,8,9,]
 
-//these are the default special characters I chose but more can be added and it won't impact the functionality of the program
-var specialChar=["!", "@", "#","$", "%", "^", "&", "*"]
+//These are the special characters i could find, more can be added without needing to adjust any other line of code
+var specialChar=["!", "@", "#","$", "%", "^", "&", "*", "'", "(", ")", "+",",","-",".","/",":",";", "<", "=", ">", "?", "[", "]", "^", "_" , "`", "{", "|", "}", "~"];
 
 
 //this variable is used to pick the case (upper or lower), number, or char
@@ -222,7 +266,7 @@ function generatePassword(){
                   checkerUpper = true;
                 }
                 else if(pick == 1){
-                  randomNumber();
+                  randomSpecial();
                   checkerSpecial = true;
                 }
           }
@@ -242,11 +286,11 @@ function generatePassword(){
           for(var i=0; i<passLength; i++){
               pick = Math.floor(Math.random() * 2);
                 if(pick == 0 ){
-                  randomUpper();
+                  randomNumber();
                   checkerNumber = true;
                 }
                 else if(pick == 1){
-                  randomNumber();
+                  randomSpecial();
                   checkerSpecial = true;
                 }
           }
@@ -436,24 +480,30 @@ function generatePassword(){
       && passOption.lower == false 
       && passOption.number == false
       && passOption.special == false){
+
+        //clears the password that's in the password box before generating a new one
+        passOption.password = [];
         randomUpperLoop();
       }
       else if( passOption.upper == false
         && passOption.lower  
         && passOption.number == false
         && passOption.special == false){
+          passOption.password = [];
           randomLowerLoop();
         }
         else if( passOption.upper == false
           && passOption.lower  == false
           && passOption.number 
           && passOption.special == false){
+            passOption.password = [];
             randomNumberLoop();
           }
           else if( passOption.upper == false
             && passOption.lower  == false
             && passOption.number == false
             && passOption.special ){
+              passOption.password = [];
               randomSpecialLoop();
             }
 
