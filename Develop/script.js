@@ -5,6 +5,7 @@
 
 var generateBtn = document.querySelector("#generate");
 
+//The variable containing the password and options chosen
 var passOption = {
   upper: false,
   lower: false,
@@ -16,6 +17,8 @@ var passOption = {
 var upperCase=["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V","W", "X", "Y","Z"];
 var lowerCase=["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var numbers=[0,1,2,3,4,5,6,7,8,9,]
+
+//these are the default special characters I chose but more can be added and it won't impact the functionality of the program
 var specialChar=["!", "@", "#","$", "%", "^", "&", "*"]
 
 
@@ -35,13 +38,18 @@ var passwordString;
 function generatePassword(){
 
 
-    var passLength = prompt("how long do you want the password to be? (for security, must be more than 4 characters)");
+    var passLength = prompt("how long do you want the password to be? (can be 8 to 128 in length)");
 
 
-    if(passLength <= 3){
-      return "You need to use at least 4 characters";
-    }
-    
+    //makes sure the user is supplying a password length that fits the criteria
+    if(passLength === null){
+      return "No password length requested";
+     }
+    if(passLength < 8 || passLength>128){
+      return "You need to use between 8 and 128 characters";
+     }
+     
+     //if the password length is within the acceptance criteria, than asks the options
       passOption.upper = window.confirm("Do you want upper case?");
       passOption.lower = window.confirm("Do you want lower case?");
       passOption.number = window.confirm("Do you want numbers?");
@@ -49,7 +57,9 @@ function generatePassword(){
       
      
 
-        //this fill the array with random Upper Case
+      //looped generators/functions (only used if the user picks a single option)
+
+        //will fill the array with random Upper Case
     var randomUpperLoop = function(){
       for(var i=0; i<passLength; i++){
         var upperPush = Math.floor(Math.random()*upperCase.length);
@@ -58,7 +68,7 @@ function generatePassword(){
       }
     }
 
-    //will add to array with random Lower Case
+    //will fill the array with random Lower Case
     var randomLowerLoop = function(){
       for(var i=0; i<passLength;i++){
         var lowerPush = Math.floor(Math.random()*lowerCase.length);
@@ -69,7 +79,7 @@ function generatePassword(){
     }
 
     var randomNumberLoop = function(){
-    //adds random numbers to the array
+    //will fill the array with random numbers
       for(var i=0; i<passLength;i++){
         var numbersPush = Math.floor(Math.random()*numbers.length);
         var selectedNumbers = numbers[numbersPush];
@@ -78,7 +88,7 @@ function generatePassword(){
       }
     }
 
-    //adds random special characters to the array
+    //will fill the array with random special characters
     var randomSpecialLoop = function(){
       for(var i=0; i<passLength;i++){
         var specialPush = Math.floor(Math.random()*specialChar.length);
@@ -88,8 +98,9 @@ function generatePassword(){
     }
 
 
-    
-    //non-looped options
+    //non-looped options (fills the array one character at a time)
+
+    //adds random upper case letters to the array
     var randomUpper = function(){
 
         upperPush = Math.floor(Math.random()*upperCase.length);
@@ -98,7 +109,7 @@ function generatePassword(){
       
     }
 
-    //will add to array with random Lower Case
+    //adds random lower case letters to the array
     var randomLower = function(){
       
         lowerPush = Math.floor(Math.random()*lowerCase.length);
@@ -107,8 +118,9 @@ function generatePassword(){
 
     }
 
+        //adds random numbers to the array
+
     var randomNumber = function(){
-    //adds random numbers to the array
       
         numbersPush = Math.floor(Math.random()*numbers.length);
         selectedNumbers = numbers[numbersPush];
@@ -126,29 +138,44 @@ function generatePassword(){
     }
 
 
-    //for if the user picks TWO options
+   
+    //each of these if statements/do while loops basically work the same
+    //I'm not what to use to make this more efficient
+    //the code is essentially the same in structure but the conditions are all different
+  
+    
+    //this statement goes through if the user only wants upper and lower case for a password
     if (passOption.upper  
         && passOption.lower 
         && passOption.number == false
         && passOption.special == false
         ){
           do{
-
+            //resets the password array if the not all options are selected
             passOption.password = [];
+            
+            //resets the upper and lower case confirmation
             checkerUpper = false;
             checkerLower = false;
 
+            //runs as long as the password length
             for(var i=0; i<passLength; i++){
+              //picks a random number (between 0 & 1)
                 pick = Math.floor(Math.random() * 2);
+                  //if 0 is selected, puts a random Uppercase in the array/password
                   if(pick == 0 ){
                     randomUpper();
+                    //confirms an uppercase has been used
                     checkerUpper = true;
                   }
+                  //if 1 is selected, puts a random lowercase in the array/password
                   else if(pick == 1){
                     randomLower();
+                    //confirms a lowercase has been used
                     checkerLower = true;
                   }
             }
+            //will restart the loop if both a lower case and uppercase have not been used
           }while(checkerUpper == false || checkerLower == false);
 
     }
@@ -227,7 +254,7 @@ function generatePassword(){
 
 
 
-//if the user picks THREE options
+    //if the user picks THREE options
     else if(passOption.upper 
         && passOption.lower 
         && passOption.number
@@ -364,6 +391,9 @@ function generatePassword(){
             
       }
 
+
+
+      // if the user picks all options
     else if(passOption.upper 
         && passOption.lower 
         && passOption.number
@@ -400,6 +430,7 @@ function generatePassword(){
           }while(checkerUpper == false || checkerLower == false || checkerNumber == false || checkerSpecial == false);
     }
 
+    //if the user only picks one option
     else if( passOption.upper 
       && passOption.lower == false 
       && passOption.number == false
@@ -424,14 +455,19 @@ function generatePassword(){
             && passOption.special ){
               randomSpecialLoop();
             }
+
+
+        //if the user doesn't pick any options
         else{
           alert("you didn't pick any options");
         }
 
-      console.log(passOption.password);
+        
 
+      //turns the password from an array to a string
       passwordString = passOption.password.join("");
-      console.log(passwordString);
+      
+      //returns the password as a string
       return passwordString;
 
 }
