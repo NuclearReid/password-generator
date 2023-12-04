@@ -22,9 +22,10 @@ var numbers=[0,1,2,3,4,5,6,7,8,9,]
 var specialChar=["!", "@", "#","$", "%", "^", "&", "*"]
 
 
-//this variable is used to pick the case, number, or char
+//this variable is used to pick the case (upper or lower), number, or char
 var pick;
-//these variable is used to make sure every option is used
+
+//these variable are used to make sure every option the user selected has been used
 var checkerUpper = false;
 var checkerLower = false;
 var checkerNumber = false;
