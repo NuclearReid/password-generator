@@ -1,5 +1,18 @@
 # 03 JavaScript: Password Generator
 
+Using the pre-given code/pre-built website, I have created a simple password generator in JavaScript.
+The user is given asked what password length they want and if it's within the correct parameters (can be 8-128 characters in length) Then they are asked if they want Upper/lower case letters, numbers, or special characters.
+
+Whichever options the user chooses, the generator will guarantee that all of those options are used in creating the password.
+
+If no options are selected or the password length the specified criteria, the website will inform the user what the criteria are for a password.
+
+
+I have only put in 8 special characters that can be used (!@#$%^&*) however, more can be added to the array at any time and it won’t require changing any other section of code.
+
+
+
+
 ## Your Task
 
 This week's Challenge requires you to modify starter code to create an application that enables employees to generate random passwords based on criteria that they’ve selected. This app will run in the browser and will feature dynamically updated HTML and CSS powered by JavaScript code that you write. It will have a clean and polished, responsive user interface that adapts to multiple screen sizes.

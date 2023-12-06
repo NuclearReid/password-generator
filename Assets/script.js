@@ -1,53 +1,5 @@
 // Assignment Code
-
-
-
-
 var generateBtn = document.querySelector("#generate");
-
-
-//this was not originally fully my idea. 
-//I got to the idea for this solution with the help of Microsoft Copilot. 
-//I'm including it in my file because it's a better option but it's not fully mine
-
-
-var upperCase = [A B C D....];
-var lowerCase = [a b c d...];
-var numbers = [1 2 3 4..];
-var special = [! @ # $...];
-
-var passToFill = [];
-
-var length = prompt("how long")?
-var upper = confirm("want uppercase?");
-if(upper){
-  passToFill = passToFill.join(upperCase);
-}
-var upper = confirm("want lower case?");
-if(lower){
-  passToFill = passToFill.join(upperlower);
-}
-var upper = confirm("want numbers?");
-if(number){
-  passToFill = passToFill.join(uppernumbers);
-}
-var upper = confirm("want special?");
-if(special){
-  passToFill = passToFill.join(upperspecial);
-}
-
-return passToFill
-
-
-
-
-
-
-
-
-
-// this is absudrly ineffeicient, going to rewrite it
-
 
 //The variable containing the password and options chosen
 var passOption = {
@@ -88,10 +40,11 @@ function generatePassword(){
 
     //makes sure the user is supplying a password length that fits the criteria
     if(passLength === null){
-      return "No password length requested";
+      return null;
      }
     if(passLength < 8 || passLength>128){
-      return "You need to use between 8 and 128 characters";
+      alert("You need to use between 8 and 128 characters");
+      return null;
      }
      
      //if the password length is within the acceptance criteria, than asks the options
@@ -296,6 +249,52 @@ function generatePassword(){
           }
         }while(checkerNumber == false || checkerSpecial == false);
     }
+    else if (passOption.upper == false
+      && passOption.lower  
+      && passOption.number 
+      && passOption.special == false){
+        do{
+
+          passOption.password = [];
+          checkerLower = false;
+          checkerNumber = false;
+
+          for(var i=0; i<passLength; i++){
+              pick = Math.floor(Math.random() * 2);
+                if(pick == 0 ){
+                  randomLower();
+                  checkerLower = true;
+                }
+                else if(pick == 1){
+                  randomNumber();
+                  checkerNumber = true;
+                }
+          }
+        }while(checkerNumber == false || checkerLower == false);
+    }
+    else if (passOption.upper == false
+      && passOption.lower 
+      && passOption.number == false
+      && passOption.special ){
+        do{
+
+          passOption.password = [];
+          checkerSpecial = false;
+          checkerLower = false;
+
+          for(var i=0; i<passLength; i++){
+              pick = Math.floor(Math.random() * 2);
+                if(pick == 0 ){
+                  randomLower();
+                  checkerLower = true;
+                }
+                else if(pick == 1){
+                  randomSpecial ();
+                  checkerSpecial = true;
+                }
+          }
+        }while(checkerSpecial == false || checkerLower == false);
+    }
 
 
 
@@ -389,7 +388,7 @@ function generatePassword(){
                   }
                   else if(pick == 1){
                     randomNumber();
-                    checkerLower = true;
+                    checkerNumber = true;
                   }
                   else if(pick == 2){
                     randomSpecial();
@@ -524,8 +523,6 @@ function generatePassword(){
 }
 
 
-// generatePassword();
-
 
 
 
@@ -549,3 +546,158 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//What I thought would be a better way to do this project. But it doesn't meet all the acceptance criteria
+
+
+//the thought process.
+//have a blank array that will eventually be filled up with the different options
+//the password will then be picked from this new array
+
+//like, if they want uppercase then all then the uppercase letters get added
+//to the password array. same for all the other options.
+//the program will then randomly pick array spots from this newly created array
+
+
+//this is my psudo code
+////////////////////////////////////////////////////
+// var upperCase = ["ABCDEFGHIJKLMNOPQRSTUVWKYZ"];
+// var lowerCase = ["abcdefghijklmnopqrstuvwkyz"];
+// var numbers = ["0123456789"];
+// var special = ["!@#$%^&*()_+-={}|[]:<>?,./"];
+
+// var passToFill = [];
+// //remember to use the .split() method
+// var passLength = prompt("how long?");
+// var upper = confirm("want uppercase?");
+// if(upper){
+//   passToFill = passToFill.join(upperCase);
+// }
+// var upper = confirm("want lower case?");
+// if(lower){
+//   passToFill = passToFill.join(upperlower);
+// }
+// var upper = confirm("want numbers?");
+// if(number){
+//   passToFill = passToFill.join(uppernumbers);
+// }
+// var upper = confirm("want special?");
+// if(special){
+//   passToFill = passToFill.join(upperspecial);
+// }
+// //make this else statement for things that don't work
+// else{
+//   prompt("you didn't pick any options")
+// }
+// for (var i = 0; i<passLength.length; i++){
+//   //fill up the new password array here with random array spots
+// }
+// //return the new password
+// return passToFill;
+/////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
+//the actual code. It works, but doesn't confirm that all the user options are in the final password
+
+
+// //global variables
+// //the options the user can pick for their password
+// var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWKYZ";
+// var lowerCase = "abcdefghijklmnopqrstuvwkyz";
+// var number = "0123456789";
+// var specialCharcters = "!@#$%^&*()_+-={}|[]:<>?,./";
+
+// //this array will be filled with the options the user picks
+// var passSet = [];
+
+
+
+// var passArray;
+
+// var finalPass = [];
+
+// //After getting the final password, this is the variable used to convert it to a string
+// var passwordString;
+// var generatePassword =function(){
+
+//   //these turn the options into an array. I didn't want to type out ["A", "B", "C"....]
+//   var upperCaseArray = upperCase.split("");
+//   var lowerCaseArray = lowerCase.split("");
+//   var numbersArray = number.split("");
+//   var specialArray = specialCharcters.split("")
+
+//   //Clears the arrays that i'll be filling each time for the password options/password
+//   passSet = [];
+//   finalPass =[];
+
+//   //gets the length of the password
+//   var passLength = prompt("how long do you want your password to be?(Can be 8-128 characters)");
+
+//   //makes sure the password is within the limits given by the acceptance criteria
+//   if(passLength == 0 || passLength ==""){
+//     return "No password length entered";
+//   }
+//   if(passLength < 8 || passLength>128){
+//     alert('password needs to be between 8 and 128 characters');
+//     return "password is outside the limits";
+//   }
+
+//   //these next  4 if statements essentially all work the same.
+//   //if the user chose the option, that option is then added to the array the password can later choose from
+
+//   //checks if the user want's uppercase letters in the password
+//   var upper = confirm("do you want to use uppercase?");
+//   if(upper){
+//     //adds uppercase letters to the array that the password can choose from later in the program
+//     passSet.push(...upperCaseArray);
+//     //just to help me know the if statment is being reached
+//     console.log("in the upper if statement");
+//   }
+//   var lower = confirm("do you want to use lowercase?");
+//   if(lower){
+//     passSet.push(...lowerCaseArray);
+//     console.log("in the lower if statment");
+//   }
+//   var numbers = confirm("do you want to add numbers to the password?");
+//   if(numbers){
+//     passSet.push(...numbersArray);
+//     console.log("in the number if statement");
+//   }
+//   var special = confirm("do you want to add special characters to the password?");
+//   if(special){
+//     passSet.push(...specialArray);
+//     console.log("in the special if statment");
+//   }
+//   //let's me know what the final option array has that the random password can then choose from
+//   console.log(passSet);
+
+//   // runs as many times as the user chose for the length of the password
+// for(var i =0;i<passLength;i++){
+//   //picks a random number that is between 0 and the length of the option array
+//   var passRando = Math.floor(Math.random()*passSet.length);
+//   //takes that random number and converts it that spot in the array that has all the user options for the password
+//   var passSelected = passSet[passRando];
+//   //puts that random character into the end of the finalPass array  --> this is essentially what the password will end up being
+//   finalPass.push(passSelected);
+// }
+
+// console.log(passRando);
+// console.log(finalPass);
+// //converts that finalPass from an array to a string. (otherwise the password will have a bunch of commas in it)
+// passwordString = finalPass.join("");
+
+// //returns the final password as a string
+// return passwordString;
+
+// }
