@@ -1,113 +1,35 @@
-# 03 JavaScript: Password Generator
+# Password Generator
+
+[My password generator](https://nuclearreid.github.io/password-generator/)
+
 
 Using the pre-given code/pre-built website, I have created a simple password generator in JavaScript.
-The user is given asked what password length they want and if it's within the correct parameters (can be 8-128 characters in length) Then they are asked if they want Upper/lower case letters, numbers, or special characters.
+The user is asked what password length they want and if it's within the correct parameters (can be 8-128 characters in length) they are then asked if they want to use, Upper/lower case letters, numbers, or special characters.
 
 Whichever options the user chooses, the generator will guarantee that all of those options are used in creating the password.
 
-If no options are selected or the password length the specified criteria, the website will inform the user what the criteria are for a password.
+If no options are selected or the password length isn’t within the specified criteria, the website will inform the user what the criteria are not met for a password.
+
+I have put in a bunch of special characters and more can be added to the array at any time and it won’t require changing any other section of code.
+
+I have two methods in the JavaScript file. The one that is being used at the top and the one that is commented out at the bottom of the file. 
+
+I decided to use the longer chunk of code because it will guarantee all the options were used.
+
+## Basically how this code generates a random password:
+1) it will look at the user options/arrays (upper case, lower case, numbers, special characters)
+2) it’ll then randomly pick one of those arrays
+3) Next, it picks a random spot from within the array it chose
+4) It’ll put that chosen spot from the array into the password
+5) It makes sure all the user options have been used in the password
+6) If not all the options are used, 
+7) It resets the password
+8) Runs through the generation process again till all options are chosen
 
 
-I have only put in 8 special characters that can be used (!@#$%^&*) however, more can be added to the array at any time and it won’t require changing any other section of code.
+Although the structure is for each block of my code very similar I couldn’t find a way to simplify it. In class Tom showed an easier way that is very similar to my second other method. However, I didn’t like that it creates a guarantee array of the user options than adds another array to the end of it. I like that mine is more random but with the drawback of being needing more processing to run. But it’s a small program and still does the task required of it quickly and effectively. 
 
 
-
-
-## Your Task
-
-This week's Challenge requires you to modify starter code to create an application that enables employees to generate random passwords based on criteria that they’ve selected. This app will run in the browser and will feature dynamically updated HTML and CSS powered by JavaScript code that you write. It will have a clean and polished, responsive user interface that adapts to multiple screen sizes.
-
-The password can include special characters. If you’re unfamiliar with these, see this [list of password special characters](https://www.owasp.org/index.php/Password_special_characters) from the OWASP Foundation.
-
-## User Story
-
-```
-AS AN employee with access to sensitive data
-I WANT to randomly generate a password that meets certain criteria
-SO THAT I can create a strong password that provides greater security
-```
-
-## Acceptance Criteria
-
-```
-GIVEN I need a new, secure password
-WHEN I click the button to generate a password
-THEN I am presented with a series of prompts for password criteria
-WHEN prompted for password criteria
-THEN I select which criteria to include in the password
-WHEN prompted for the length of the password
-THEN I choose a length of at least 8 characters and no more than 128 characters
-WHEN asked for character types to include in the password
-THEN I confirm whether or not to include lowercase, uppercase, numeric, and/or special characters
-WHEN I answer each prompt
-THEN my input should be validated and at least one character type should be selected
-WHEN all prompts are answered
-THEN a password is generated that matches the selected criteria
-WHEN the password is generated
-THEN the password is either displayed in an alert or written to the page
-```
-
-## Mock-Up
-
-The following image shows the web application's appearance and functionality:
-
-![The Password Generator application displays a red button to "Generate Password".](./Assets/03-javascript-homework-demo.png)
-
-## Grading Requirements
-
-> **Note**: If a Challenge assignment submission is marked as “0”, it is considered incomplete and will not count towards your graduation requirements. Examples of incomplete submissions include the following:
->
-> * A repository that has no code
->
-> * A repository that includes a unique name but nothing else
->
-> * A repository that includes only a README file but nothing else
->
-> * A repository that only includes starter code
-
-This Challenge is graded based on the following criteria: 
-
-### Technical Acceptance Criteria: 40%
-
-* Satisfies all of the preceding acceptance criteria.
-
-### Deployment: 32%
-
-* Application deployed at live URL.
-
-* Application loads with no errors.
-
-* Application GitHub URL submitted.
-
-* GitHub repository that contains application code.
-
-### Application Quality: 15%
-
-* Application user experience is intuitive and easy to navigate.
-
-* Application user interface style is clean and polished.
-
-* Application resembles the mock-up functionality provided in the Challenge instructions.
-
-### Repository Quality: 13%
-
-* Repository has a unique name.
-
-* Repository follows best practices for file structure and naming conventions.
-
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
-
-* Repository contains multiple descriptive commit messages.
-
-* Repository contains quality readme file with description, screenshot, and link to deployed application.
-
-## Review
-
-You are required to submit the following for review:
-
-* The URL of the deployed application.
-
-* The URL of the GitHub repository, with a unique name and a readme describing the project.
-
-- - -
-© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+### A screenshot of my working password generator
+I used an 8 character password utilizing all the user options for this example
+![A screenshot of my working password generator](./Assets/password%20generator%20screenshot.png)

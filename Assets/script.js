@@ -46,6 +46,10 @@ function generatePassword(){
       alert("You need to use between 8 and 128 characters");
       return null;
      }
+     else{
+      alert("you didn't enter a number");
+      return null;
+     }
      
      //if the password length is within the acceptance criteria, than asks the options
       passOption.upper = window.confirm("Do you want upper case?");
