@@ -46,7 +46,7 @@ function generatePassword(){
       alert("You need to use between 8 and 128 characters");
       return null;
      }
-     else{
+     if(isNaN (passLength)){
       alert("you didn't enter a number");
       return null;
      }
@@ -560,7 +560,6 @@ generateBtn.addEventListener("click", writePassword);
 ///////////////////////////////////////////////////////////////////
 //What I thought would be a better way to do this project. But it doesn't meet all the acceptance criteria
 
-//test
 //the thought process.
 //have a blank array that will eventually be filled up with the different options
 //the password will then be picked from this new array
